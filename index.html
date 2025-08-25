@@ -56,6 +56,14 @@
                                class="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
                     </div>
                 </div>
+                <!-- New checkbox to enable/disable candidate experience -->
+                <div class="flex items-center">
+                    <input id="enableCandidateExperience" type="checkbox" checked
+                           class="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 rounded">
+                    <label for="enableCandidateExperience" class="ml-2 block text-sm text-gray-900">
+                        Enable Candidate Experience Portal
+                    </label>
+                </div>
                 <!-- Save button -->
                 <button type="submit"
                         class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors">
@@ -68,7 +76,7 @@
         </div>
 
         <!-- Section 2: Candidate Experience -->
-        <div class="border border-gray-300 rounded-lg p-6">
+        <div id="candidateExperienceSection" class="border border-gray-300 rounded-lg p-6">
             <h2 class="text-2xl font-bold text-gray-800 mb-4">2. Candidate Experience</h2>
             <p class="text-gray-600 mb-4">
                 This is what the candidate sees.
@@ -130,7 +138,9 @@
         const vbcInstructionsInput = document.getElementById('vbcInstructions');
         const configResultBox = document.getElementById('configResultBox');
         const configResultMessage = document.getElementById('configResultMessage');
-        
+        const enableCandidateExperienceCheckbox = document.getElementById('enableCandidateExperience');
+        const candidateExperienceSection = document.getElementById('candidateExperienceSection');
+
         // Handle admin form submission
         configForm.addEventListener('submit', (e) => {
             e.preventDefault();
@@ -148,6 +158,15 @@
                              <p><strong>Scheduling Link:</strong> ${schedulingLink}</p>
                              <p><strong>VBC Instructions:</strong> ${vbcInstructions || 'N/A'}</p>`;
             displayMessage(configResultBox, configResultMessage, message);
+        });
+
+        // Toggle visibility of candidate experience section
+        enableCandidateExperienceCheckbox.addEventListener('change', () => {
+            if (enableCandidateExperienceCheckbox.checked) {
+                candidateExperienceSection.classList.remove('hidden');
+            } else {
+                candidateExperienceSection.classList.add('hidden');
+            }
         });
         
         // --- Candidate Scheduling Form Logic ---
