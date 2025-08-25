@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fingerprinting Portal</title>
+    <!-- Use Tailwind CSS for a modern, responsive design -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for the app container */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center justify-center min-h-screen p-4">
+
+    <!-- Main container for the portal -->
+    <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-2xl">
+
+        <!-- Overall Title -->
+        <h1 class="text-4xl font-extrabold text-center text-gray-800 mb-2">Fingerprinting Portal</h1>
+        <p class="text-center text-gray-500 mb-10">
+            Configure links for administration and test the candidate experience.
+        </p>
+
+        <!-- Section 1: Administrative Configuration -->
+        <div class="border border-gray-300 rounded-lg p-6 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">1. Administrative Configuration</h2>
+            <p class="text-gray-600 mb-4">
+                This section is for setting up the main details.
+            </p>
+            <form id="configForm" class="space-y-4">
+                <!-- Input field for additional cost -->
+                <div>
+                    <label for="additionalCost" class="block text-sm font-medium text-gray-700">Select Additional Cost</label>
+                    <div class="mt-1">
+                        <input type="text" name="additionalCost" id="additionalCost" placeholder="Enter price per check"
+                               class="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                    </div>
+                </div>
+                <!-- Input field for scheduling link -->
+                <div>
+                    <label for="schedulingLink" class="block text-sm font-medium text-gray-700">Scheduling Link</label>
+                    <div class="mt-1">
+                        <input type="text" name="schedulingLink" id="schedulingLink" placeholder="Enter scheduling link"
+                               class="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                    </div>
+                </div>
+                <!-- Input field for VBC Instructions -->
+                <div>
+                    <label for="vbcInstructions" class="block text-sm font-medium text-gray-700">VBC Instructions</label>
+                    <div class="mt-1">
+                        <input type="text" name="vbcInstructions" id="vbcInstructions" placeholder="Enter VBC Instructions"
+                               class="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                    </div>
+                </div>
+                <!-- Save button -->
+                <button type="submit"
+                        class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors">
+                    Save Configuration
+                </button>
+            </form>
+            <div id="configResultBox" class="mt-6 hidden">
+                <div id="configResultMessage" class="bg-gray-100 p-4 rounded-md text-sm text-gray-800"></div>
+            </div>
+        </div>
+
+        <!-- Section 2: Candidate Experience -->
+        <div class="border border-gray-300 rounded-lg p-6">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">2. Candidate Experience</h2>
+            <p class="text-gray-600 mb-4">
+                This is what the candidate sees.
+            </p>
+            <form id="schedulingForm" class="space-y-4">
+                <!-- Location dropdown -->
+                <div>
+                    <label for="locationSelect" class="block text-sm font-medium text-gray-700">Select a Location</label>
+                    <div class="mt-1">
+                        <select id="locationSelect" name="location"
+                                class="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                            <option value="">-- Please select a location --</option>
+                            <option value="New York">New York</option>
+                            <option value="San Francisco">San Francisco</option>
+                            <option value="Chicago">Chicago</option>
+                            <option value="Dallas">Dallas</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- OR separator -->
+                <div class="relative">
+                    <div class="absolute inset-0 flex items-center" aria-hidden="true">
+                        <div class="w-full border-t border-gray-300"></div>
+                    </div>
+                    <div class="relative flex justify-center text-sm">
+                        <span class="bg-white px-2 text-gray-500">OR</span>
+                    </div>
+                </div>
+
+                <!-- ZIP code input field -->
+                <div>
+                    <label for="zipCode" class="block text-sm font-medium text-gray-700">Enter your ZIP Code</label>
+                    <div class="mt-1">
+                        <input type="text" name="zipCode" id="zipCode" placeholder="e.g., 10001"
+                               class="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                    </div>
+                </div>
+
+                <!-- Submit button for candidate section -->
+                <button type="submit"
+                        class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors">
+                    Find Location-Specific Link
+                </button>
+            </form>
+            <div id="schedulingResultBox" class="mt-6 hidden">
+                <div id="schedulingResultMessage" class="bg-gray-100 p-4 rounded-md text-sm text-gray-800"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript logic for both forms
+        
+        // --- Admin Configuration Form Logic ---
+        const configForm = document.getElementById('configForm');
+        const additionalCostInput = document.getElementById('additionalCost');
+        const schedulingLinkInput = document.getElementById('schedulingLink');
+        const vbcInstructionsInput = document.getElementById('vbcInstructions');
+        const configResultBox = document.getElementById('configResultBox');
+        const configResultMessage = document.getElementById('configResultMessage');
+        
+        // Handle admin form submission
+        configForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const additionalCost = additionalCostInput.value.trim();
+            const schedulingLink = schedulingLinkInput.value.trim();
+            const vbcInstructions = vbcInstructionsInput.value.trim();
+        
+            if (schedulingLink === '') {
+                displayMessage(configResultBox, configResultMessage, 'Please enter a scheduling link.', true);
+                return;
+            }
+        
+            const message = `<p class="font-semibold">Details Saved!</p>
+                             <p><strong>Additional Cost:</strong> ${additionalCost || 'N/A'}</p>
+                             <p><strong>Scheduling Link:</strong> ${schedulingLink}</p>
+                             <p><strong>VBC Instructions:</strong> ${vbcInstructions || 'N/A'}</p>`;
+            displayMessage(configResultBox, configResultMessage, message);
+        });
+        
+        // --- Candidate Scheduling Form Logic ---
+        const schedulingForm = document.getElementById('schedulingForm');
+        const zipCodeInput = document.getElementById('zipCode');
+        const locationSelect = document.getElementById('locationSelect');
+        const schedulingResultBox = document.getElementById('schedulingResultBox');
+        const schedulingResultMessage = document.getElementById('schedulingResultMessage');
+        
+        // Define a simple mapping of locations/ZIP codes to scheduling links
+        const locationLinks = {
+            'New York': 'https://vendor.com/schedule/ny-fingerprinting',
+            'San Francisco': 'https://vendor.com/schedule/sf-fingerprinting',
+            'Chicago': 'https://vendor.com/schedule/chicago-fingerprinting',
+            'Dallas': 'https://vendor.com/schedule/dallas-fingerprinting',
+            // Example ZIP code mappings
+            '10001': 'https://vendor.com/schedule/ny-fingerprinting',
+            '60601': 'https://vendor.com/schedule/chicago-fingerprinting',
+            '75201': 'https://vendor.com/schedule/dallas-fingerprinting'
+        };
+        
+        // Handle scheduling form submission
+        schedulingForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const zipCode = zipCodeInput.value.trim();
+            const location = locationSelect.value;
+            let schedulingLink = '';
+        
+            if (zipCode && location) {
+                displayMessage(schedulingResultBox, schedulingResultMessage, 'Please enter either a ZIP code or select a location, not both.', true);
+                return;
+            } else if (zipCode) {
+                schedulingLink = locationLinks[zipCode];
+            } else if (location) {
+                schedulingLink = locationLinks[location];
+            }
+        
+            if (schedulingLink) {
+                const message = `<p class="font-semibold text-center">Your live scheduling link is below!</p>
+                                 <p class="mt-2 text-center">
+                                     <a href="${schedulingLink}" target="_blank" class="text-blue-600 hover:underline font-medium">${schedulingLink}</a>
+                                 </p>`;
+                displayMessage(schedulingResultBox, schedulingResultMessage, message);
+            } else {
+                displayMessage(schedulingResultBox, schedulingResultMessage, 'No scheduling link found for your selection. Please try another ZIP code or location.', true);
+            }
+        });
+        
+        // --- Common Function for Displaying Messages ---
+        function displayMessage(resultBox, resultMessage, message, isError = false) {
+            resultMessage.innerHTML = message;
+            resultBox.classList.remove('hidden');
+            resultBox.classList.remove('bg-gray-100', 'bg-red-100');
+            resultMessage.classList.remove('text-gray-800', 'text-red-800');
+        
+            if (isError) {
+                resultBox.classList.add('bg-red-100');
+                resultMessage.classList.add('text-red-800');
+            } else {
+                resultBox.classList.add('bg-gray-100');
+                resultMessage.classList.add('text-gray-800');
+            }
+        }
+    </script>
+</body>
+</html>
